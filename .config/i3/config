@@ -189,3 +189,6 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # emacsclient
 bindsym $mod+Escape exec emacsclient -c
+
+# suspend
+bindsym $mod+Shift+s exec "i3lock -c 000000 ; systemctl suspend"
