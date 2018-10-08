@@ -13,6 +13,10 @@ set $mod Mod4
 
 
 
+# gaps
+gaps inner 15
+gaps outer 5 
+
 # Compositing manager:
 exec --no-startup-id compton
 # Start Emacs as daemon
