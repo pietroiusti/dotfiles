@@ -11,17 +11,16 @@
 
 set $mod Mod4
 
-
-
 # gaps
 gaps inner 15
-gaps outer 5 
+gaps outer 15 
+# borders
+default_border none
 
 # Compositing manager:
 exec --no-startup-id compton
 # Start Emacs as daemon
 exec --no-startup-id emacs --daemon
-
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -171,6 +170,15 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Caps_Lock mode "default"
         bindsym $mod+r mode "default"
+
+
+        # gaps management
+	bindsym equal gaps inner current plus 5
+	bindsym minus gaps inner current minus 5
+	bindsym 0 gaps inner current set 0; gaps outer current set 0
+	bindsym 1 gaps outer current plus 5
+	bindsym 2 gaps outer current minus 5
+	bindsym grave gaps inner current set 15; gaps outer current set 15
 }
 
 bindsym $mod+r mode "resize"
@@ -183,16 +191,17 @@ bar {
 
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym                  XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym                  XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # audio keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 3%+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 3%-
-bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym                  XF86AudioRaiseVolume exec --no-startup-id amixer set Master 3%+
+bindsym                  XF86AudioLowerVolume exec --no-startup-id amixer set Master 3%-
+bindsym                  XF86AudioMute exec amixer -q set Master toggle
 
 # emacsclient
-bindsym $mod+Escape exec emacsclient -c
+bindsym $mod+Escape     exec emacsclient -c
 
 # suspend
-bindsym $mod+Shift+s exec "i3lock -c 000000 ; systemctl suspend"
+bindsym $mod+Shift+s    exec "i3lock -c 000000 ; systemctl suspend"
+
