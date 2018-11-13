@@ -12,8 +12,8 @@
 set $mod Mod4
 
 # gaps
-gaps inner 0
-gaps outer 15 
+gaps inner 15
+gaps outer 0 
 # borders
 default_border none
 
