@@ -201,7 +201,11 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+	mode hide
+
+	tray_padding 0
 }
+bindsym $mod+Shift+grave bar mode toggle
 
 
 # Sreen brightness controls
