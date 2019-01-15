@@ -16,13 +16,8 @@ gaps inner 15
 gaps outer 0 
 # borders
 default_border none
-
-# Compositing manager:
-exec --no-startup-id compton
-# Start Emacs as daemon
-exec --no-startup-id emacs --daemon
-# Start Nextcloud
-exec nextcloud
+# no focus change with mous
+focus_follows_mouse no
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -222,4 +217,15 @@ bindsym $mod+Escape     exec emacsclient -c
 
 # suspend
 bindsym $mod+Shift+s    exec "i3lock -c 000000 ; systemctl suspend"
-
+#set keycodes
+exec setxkbmap -keycodes evdev_custom_thinkpad_T460
+#set keyboard repeat rate
+exec xset r rate 200 60
+# Compositing manager:
+exec --no-startup-id compton
+# wallpaper
+exec feh --bg-scale ~/Pictures/lievitating_gnu.png
+# Start Emacs as daemon
+exec --no-startup-id emacs --daemon
+# Start Nextcloud
+exec nextcloud
