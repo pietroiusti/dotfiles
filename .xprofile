@@ -1,0 +1,5 @@
+xset r rate 200 60
+setxkbmap -keycodes evdev_custom_thinkpad_T460
+emacs --daemon 
+nm-applet --no-agent &
+nextcloud &
