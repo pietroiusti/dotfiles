@@ -1,0 +1,5 @@
+[core]
+    editor = emacsclient -c
+[user]
+	name = glptrst
+	email = giulio.pietroiusti@gmail.com
