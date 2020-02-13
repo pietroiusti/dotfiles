@@ -1,0 +1,46 @@
+# path: ~/.ratpoisonrc
+# Set the prefix key to that of screen's default
+#escape C-z
+# Left window key
+#escape Super_L
+
+# Overriding CTRL+t 'c' to start aterm instead of xterm
+
+
+# workspaces
+exec /usr/bin/rpws init 9 -k
+bind C-1 exec rpws 1
+bind C-2 exec rpws 2
+bind C-3 exec rpws 3
+bind C-4 exec rpws 4
+bind C-5 exec rpws 5
+bind C-6 exec rpws 6
+bind C-7 exec rpws 7
+bind C-8 exec rpws 8
+bind C-9 exec rpws 9
+
+# bindings
+bind o focus
+bind c exec chromium
+bind C exec chromium --incognito
+bind e exec emacsclient -c
+bind E exec emacs
+
+# Monitor Brightness
+definekey top XF86MonBrightnessDown exec xbacklight -dec 5
+definekey top XF86MonBrightnessUp exec xbacklight -inc 5
+
+# volume control
+definekey top XF86AudioLowerVolume exec amixer set Master 5%-
+definekey top XF86AudioRaiseVolume exec amixer set Master 5%+
+definekey top XF86AudioMute exec amixer set Master toggle
+
+# Media player controls
+definekey top XF86AudioPlay exec mpc toggle
+definekey top XF86AudioNext exec mpc next
+definekey top XF86AudioPrev exec mpc prev
+
+# # multimonitor
+# definekey top M-r restart
+# definekey top M-n nextscreen
+# definekey top M-N prevscreen
