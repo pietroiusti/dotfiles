@@ -1,0 +1,44 @@
+(in-package :stumpwm)
+
+(define-key *root-map* (kbd "c") "exec chromium")
+(define-key *root-map* (kbd "C") "exec chromium --incognito")
+(define-key *root-map* (kbd "e") "exec emacsclient -c")
+(define-key *root-map* (kbd "E") "exec emacs")
+
+(define-key *root-map* (kbd "C-q") "send-raw-key")
+
+(stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
+(stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
+
+(stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86AudioRaiseVolume") "exec amixer set Master 3%+")
+(stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86AudioLowerVolume") "exec amixer set Master 3%-")
+(stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86AudioMute") "exec amixer set Master toggle")
+
+(define-remapped-keys
+    '(("(Chromium)"
+	   ("C-a"		. "Home")
+	   ("C-e"   	. "End")
+       ("C-n"   	. "Down")
+	   ("C-p"   	. "Up")
+       ("C-f"   	. "Right")
+       ("M-f"   	. "C-Right")
+       ("C-b"   	. "Left")
+       ("M-b"   	. "C-Left")
+       ("C-v"   	. "Next")
+       ("M-v"   	. "Prior")
+       ("M-w"   	. "C-c")
+       ("C-w"   	. "C-x")
+       ("C-y"   	. "C-v")
+       ("M-<"   	. "Home")
+       ("M->"   	. "End")
+       ("C-M-b" 	. "M-Left")
+       ("C-M-f" 	. "M-Right")
+       ("C-k"   	. ("C-S-End" "C-x")))))
+
+; change window with mouse click
+(setf *mouse-focus-policy* :click) 
+
+; modline
+(setf *window-format* "%m%n%s%c")
+(setf *screen-mode-line-format* (list "[^B%n^b] %W^>%d"))
+(enable-mode-line (current-screen) (current-head) t)
