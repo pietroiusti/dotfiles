@@ -1,5 +1,9 @@
 xset r rate 200 60
 setxkbmap -keycodes evdev_custom_thinkpad_T460
-emacs --daemon 
-nm-applet --no-agent &
-nextcloud &
+
+# I start the following with EXWM.
+# (nextcloud was giving EXWM some trouble when started from here)
+# nm-applet --no-agent &
+# nextcloud &
+# picom -b
+
