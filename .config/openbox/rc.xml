@@ -99,7 +99,7 @@ by other applications, or saved in your session
 
 use obconf if you want to change these without having to log out
 and back in -->
-    <number>9</number>
+    <number>10</number>
     <firstdesk>1</firstdesk>
     <names>
       <!-- set names up here if you want to, like this:
@@ -115,6 +115,7 @@ and back in -->
       <name>desktop 7</name>
       <name>desktop 8</name>
       <name>desktop 9</name>
+      <name>desktop 0</name>
     </names>
     <popupTime>875</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
@@ -258,6 +259,11 @@ and back in -->
     <keybind key="W-9">
       <action name="GoToDesktop">
         <to>9</to>
+      </action>
+    </keybind>
+    <keybind key="W-0">
+      <action name="GoToDesktop">
+        <to>10</to>
       </action>
     </keybind>
     <keybind key="W-d">
@@ -457,18 +463,18 @@ and back in -->
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Chromium</name>
+          <name>Chrome</name>
         </startupnotify>
-        <command>chromium</command>
+        <command>chromium --incognito</command>
       </action>
     </keybind>
     <keybind key="W-c">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Chromium</name>
+          <name>Chrome</name>
         </startupnotify>
-        <command>chromium --incognito</command>
+        <command>chromium</command>
       </action>
     </keybind>
     <keybind key="W-S-b">
@@ -534,6 +540,12 @@ and back in -->
         <command>pcmanfm</command>
       </action>
     </keybind>
+
+    <!-- Openbox keybindings -->
+    <keybind key="W-r">
+      <action name="Reconfigure"/>
+    </keybind>
+
   </keyboard>
   <mouse>
     <dragThreshold>1</dragThreshold>
@@ -896,6 +908,7 @@ and back in -->
   </menu>
   <applications>
     <application class="*">
+      <decor>no</decor>
       <focus>yes</focus>
     </application>
     <application class="Emacs">
