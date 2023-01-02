@@ -1,11 +1,98 @@
-(in-package :stumpwm)
+;; Install quicklisp.
+;; Install stumpwm-git from AUR.
+;; Install stumpwm-contrib.
+;;
+;; Hiding lxpanel/xfce4panel does not work...
+;; Here I'm loading stumptray.
+;; Stumptray disappear when toggling the modeline...
+
+
+;; Some configs that could be/have been useful:
+;; https://git.mmk2410.org/mmk2410/dotfiles/src/branch/main/stumpwm/.stumpwmrc
+;; https://github.com/Gavinok/stump-conf/blob/main/config
+
+(in-package :stumpwm) ;; needed?
+
+;; (run-shell-command "lxpanel")
+(run-shell-command "xsetroot -cursor_name left_ptr")
 
 (define-key *root-map* (kbd "c") "exec chromium")
 (define-key *root-map* (kbd "C") "exec chromium --incognito")
+(define-key *root-map* (kbd "b") "exec brave --incognito")
+
 (define-key *root-map* (kbd "e") "exec emacsclient -c")
 (define-key *root-map* (kbd "E") "exec emacs")
 
 (define-key *root-map* (kbd "C-q") "send-raw-key")
+
+;; TOP MAP
+(define-key *top-map* (kbd "s-Return") "exec")
+(define-key *top-map* (kbd "s-r") "loadrc")
+(define-key *top-map* (kbd "s-d") "exec dmenu_run")
+
+
+;; (define-key *top-map* (kbd "M-Tab") "next")
+(define-key *top-map* (kbd "s-e") "exec emacsclient -c")
+
+(defcommand toggle-float ()
+  ()
+  "Toggle weather window is floating or not"
+  (if (typep (current-window) 'STUMPWM::FLOAT-WINDOW)
+      (unfloat-this)
+      (float-this))) ;;https://git.mmk2410.org/mmk2410/dotfiles/commit/60bfaa9e49b0cb02a26b552207f1abdb33961d93
+(define-key *top-map* (kbd "s-S-SPC") "toggle-float")
+
+
+(define-key *top-map* (kbd "s-h") "move-focus left")
+(define-key *top-map* (kbd "s-b") "move-focus left")
+(define-key *top-map* (kbd "s-l") "move-focus right")
+(define-key *top-map* (kbd "s-f") "move-focus right")
+(define-key *top-map* (kbd "s-k") "move-focus up")
+(define-key *top-map* (kbd "s-p") "move-focus up")
+(define-key *top-map* (kbd "s-j") "move-focus down")
+(define-key *top-map* (kbd "s-n") "move-focus down")
+
+(define-key *top-map* (kbd "s-H") "move-window left")
+(define-key *top-map* (kbd "s-B") "move-window left")
+(define-key *top-map* (kbd "s-L") "move-window right")
+(define-key *top-map* (kbd "s-F") "move-window right")
+(define-key *top-map* (kbd "s-K") "move-window up")
+(define-key *top-map* (kbd "s-P") "move-window up")
+(define-key *top-map* (kbd "s-J") "move-window down")
+(define-key *top-map* (kbd "s-N") "move-window down")
+
+;; create groups (aka workspaces)
+(gnewbg "second")
+(gnewbg "third")
+(gnewbg "fourth")
+(gnewbg "fifth")
+(gnewbg "sixth")
+(gnewbg "seventh")
+(gnewbg "eigth")
+(gnewbg "ninth")
+(gnewbg "last")
+
+(define-key *top-map* (kbd "s-1") "gselect 1")
+(define-key *top-map* (kbd "s-2") "gselect 2")
+(define-key *top-map* (kbd "s-3") "gselect 3")
+(define-key *top-map* (kbd "s-4") "gselect 4")
+(define-key *top-map* (kbd "s-5") "gselect 5")
+(define-key *top-map* (kbd "s-6") "gselect 6")
+(define-key *top-map* (kbd "s-7") "gselect 7")
+(define-key *top-map* (kbd "s-8") "gselect 8")
+(define-key *top-map* (kbd "s-9") "gselect 9")
+(define-key *top-map* (kbd "s-0") "gselect 0")
+
+(define-key *top-map* (kbd "s-!") "gmove 1")
+(define-key *top-map* (kbd "s-@") "gmove 2")
+(define-key *top-map* (kbd "s-#") "gmove 3")
+(define-key *top-map* (kbd "s-$") "gmove 4")
+(define-key *top-map* (kbd "s-%") "gmove 5")
+(define-key *top-map* (kbd "s-^") "gmove 6")
+(define-key *top-map* (kbd "s-&") "gmove 7")
+(define-key *top-map* (kbd "s-*") "gmove 8")
+(define-key *top-map* (kbd "s-(") "gmove 9")
+(define-key *top-map* (kbd "s-)") "gmove 0")
 
 (stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
 (stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
@@ -15,7 +102,7 @@
 (stumpwm:define-key stumpwm:*top-map* (stumpwm:kbd "XF86AudioMute") "exec amixer set Master toggle")
 
 (define-remapped-keys
-    '(("(Chromium)"
+    '(("(Chromium|Brave)"
 	   ("C-a"		. "Home")
 	   ("C-e"   	. "End")
        ("C-n"   	. "Down")
@@ -29,16 +116,45 @@
        ("M-w"   	. "C-c")
        ("C-w"   	. "C-x")
        ("C-y"   	. "C-v")
+       ("C-s"           . "C-f")
        ("M-<"   	. "Home")
        ("M->"   	. "End")
        ("C-M-b" 	. "M-Left")
        ("C-M-f" 	. "M-Right")
-       ("C-k"   	. ("C-S-End" "C-x")))))
+       ("C-k"   	. ("C-S-End" "C-x"))
+       ("C-m"            . "Return"))))
 
 ; change window with mouse click
 (setf *mouse-focus-policy* :click) 
 
-; modline
-(setf *window-format* "%m%n%s%c")
-(setf *screen-mode-line-format* (list "[^B%n^b] %W^>%d"))
+; modeline
+;; (setf *window-format* "%m%n%s%c")
+;; (setf *screen-mode-line-format* (list "[^B%n^b] %W^>%d"))
+(setf *screen-mode-line-format* (list "[ %g ]"))
+(setf *mode-line-position* :bottom)
 (enable-mode-line (current-screen) (current-head) t)
+
+
+;; (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+;;                                        (user-homedir-pathname))))
+;;   (when (probe-file quicklisp-init)
+;;     (load quicklisp-init)))
+
+;; (stumpwm:add-to-load-path "~/usr/share/stumpwm/contrib/modeline/stumptray")
+(load "~/quicklisp/setup.lisp")
+
+(load-module "stumptray")
+(stumptray::stumptray)
+
+(load-module "swm-gaps")
+;; Head gaps run along the 4 borders of the monitor(s)
+(setf swm-gaps:*head-gaps-size* 0)
+;; Inner gaps run along all the 4 borders of a window
+(setf swm-gaps:*inner-gaps-size* 5)
+;; Outer gaps add more padding to the outermost borders of a window (touching
+;; the screen border)
+(setf swm-gaps:*outer-gaps-size* 10)
+;; Call command
+;; toggle-gaps
+
+;; (run-shell-command "emacs -daemon")
